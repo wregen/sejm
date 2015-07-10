@@ -1,11 +1,10 @@
 var dataStructures = require('./app_modules/dataStructures.js');
+var urlBuilder = require('./app_modules/urlBuilder.js');
 
-
-dataStructures.getAllVotes('agent.xsp?symbol=posglos&NrKadencji=7')
+dataStructures.getAllVotes(urlBuilder.votingStartUrl())
         .then(function (out) {
             console.log(out);
         });
-
 
 
 //dataStructures.getDay('agent.xsp?symbol=listaglos&IdDnia=1456')

@@ -4,7 +4,7 @@ var url = require('url');
 var querystring = require('querystring');
 var moment = require('moment');
 
-function dataStructures(baseUrl) {
+function dataStructures() {
     var get = function (url, selectorFunc, structureFunc) {
         return new Promise(function (resolve, reject) {
             request(url, function (error, response, html) {
@@ -92,26 +92,17 @@ function dataStructures(baseUrl) {
         },
         splitted = d.split(' ');
         return [splitted[2], m[splitted[1]], splitted[0]].join('-');
-    }
+    };
     return {
-        baseUrl: baseUrl || 'http://www.sejm.gov.pl/',
-        baseUrlSuffix: 'Sejm7.nsf/',
-        getBaseUrl: function (url) {
-            var fixedUrl = url.substring(0, 1);
-            if (fixedUrl === "/") {
-                return this.baseUrl + url;
-            } else {
-                return this.baseUrl + this.baseUrlSuffix + url;
-            }
-        },
         getSingle: function (url) {
-            return get(this.getBaseUrl(url), selectVoting, strucVotingSingle);
+            return get(url, selectVoting, strucVotingSingle);
         },
         getDay: function (url) {
-            return get(this.getBaseUrl(url), selectVoting, strucVotingDay);
+            return get(url, selectVoting, strucVotingDay);
         },
         getAllVotes: function (url) {
-            return get(this.getBaseUrl(url), selectVoting, strucVoting);
+            console.log(url);
+            return get(url, selectVoting, strucVoting);
         }
 
     };
