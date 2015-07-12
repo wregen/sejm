@@ -6,17 +6,19 @@ function urlBuilder(baseUrl) {
             urlSuffix = 'Sejm7.nsf/agent.xsp';
 
     return {
-        votingStartUrl: function () {
+        votingStartUrl: function (NrKadencji) {
             var p = {
                 symbol: 'posglos',
-                NrKadencji: 7
+                NrKadencji: NrKadencji || 7
             };
             return [baseUrl, urlSuffix, '?', querystring.stringify(p)].join('');
         },
-        votingDayUrl: function (IdDnia) {
+        votingDayUrl: function (IdDnia, NrPosiedzenia, NrKadencji) {
             var p = {
                 symbol: 'listaglos',
-                IdDnia: IdDnia
+                IdDnia: IdDnia,
+                NrPosiedzenia: NrPosiedzenia,
+                NrKadencji: NrKadencji || 7
             };
             return [baseUrl, urlSuffix, '?', querystring.stringify(p)].join('');
         },

@@ -1,19 +1,24 @@
 {
-  "name": "sejm",
-  "version": "1.0.0",
-  "description": "Sejm screen scraping",
-  "main": "app.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "cheerio": "^0.19.0",
-    "request": "^2.58.0"
-  },
-  "dependencies": {
-    "express": "^4.13.1",
-    "moment": "^2.10.3"
-  }
+    "name": "sejm",
+    "version": "1.0.0",
+    "description": "Sejm screen scraping",
+    "repository": "git@github.com:wregen/sejm.git",
+    "main": "app.js",
+    "scripts": {
+        "start": "node app.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "cheerio": "^0.19.0",
+        "request": "^2.58.0"
+    },
+    "dependencies": {
+        "express": "^4.13.1",
+        "moment": "^2.10.3",
+        "q": "^1.4.1",
+        "sequelize": "^3.3.2",
+        "sqlite3": "^3.0.8"
+    }
 }

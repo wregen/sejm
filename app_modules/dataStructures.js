@@ -39,7 +39,7 @@ function dataStructures() {
     var strucVotingDay = function (el) {
         return {
             no: el.children().first().text(),
-            href: el.children().first().children().first().attr('href'),
+//            href: el.children().first().children().first().attr('href'),
             time: el.children().first().next().text(),
             text: el.children().first().next().next().text()
         };
@@ -100,8 +100,7 @@ function dataStructures() {
         getDay: function (url) {
             return get(url, selectVoting, strucVotingDay);
         },
-        getAllVotes: function (url) {
-            console.log(url);
+        getAll: function (url) {
             return get(url, selectVoting, strucVoting);
         }
 
