@@ -1,0 +1,13 @@
+{
+    "development": {
+        "username": null,
+        "password": null,
+        "database": null,
+        "storage": "./app.sqlite",
+        "dialect": "sqlite",
+        "dialectOptions": {
+            "charset": "UTF - 8"
+        },
+        "logging": null
+    }
+}

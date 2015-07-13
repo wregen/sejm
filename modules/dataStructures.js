@@ -3,6 +3,7 @@ var cheerio = require('cheerio');
 var url = require('url');
 var querystring = require('querystring');
 var moment = require('moment');
+var urlBuilder = require('./urlBuilder.js');
 
 function dataStructures() {
     var get = function (url, selectorFunc, structureFunc) {
@@ -93,17 +94,49 @@ function dataStructures() {
         splitted = d.split(' ');
         return [splitted[2], m[splitted[1]], splitted[0]].join('-');
     };
+    var flattenAllDaysResult = function (allDays) {
+        var out = [];
+        allDays.forEach(function (a) {
+            var parsedQuery = querystring.parse(url.parse(a.url).query);
+            a.data.forEach(function (b) {
+                out.push({
+                    no: b.no,
+                    time: b.time,
+                    text: b.text,
+                    idDnia: Number(parsedQuery.IdDnia)
+                });
+            });
+        });
+        return out;
+    };
+    var mkPromisseForAllDayVotes = function (all) {
+        var days = [],
+                l = all.data.length;
+//        var l = 1;
+        for (var i = 0; i < l; i++) {
+            days.push(getDay(urlBuilder.votingDayUrl(all.data[i].idDnia, all.data[i].nrPosiedzenia)));
+        }
+        return Promise.all(days);
+    };
+    var getDay = function (url) {
+        return get(url, selectVoting, strucVotingDay);
+    };
     return {
         getSingle: function (url) {
             return get(url, selectVoting, strucVotingSingle);
         },
         getDay: function (url) {
-            return get(url, selectVoting, strucVotingDay);
+            return getDay(url);
         },
         getAll: function (url) {
             return get(url, selectVoting, strucVoting);
+        },
+        mkPromisseForAllDayVotes: function (all) {
+            return mkPromisseForAllDayVotes(all);
+        },
+        flattenAllDaysResult: function (a) {
+            return flattenAllDaysResult(a);
         }
-
     };
 }
 
